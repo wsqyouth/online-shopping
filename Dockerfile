@@ -11,7 +11,7 @@ COPY . .
 RUN go mod tidy
 
 # 构建 Go 程序，使用 go build 编译当前目录下的所有文件
-RUN go build -o /app/helloapp .
+RUN go build -o /app/online-shopping .
 
 # 第二阶段：运行阶段，使用更小的基础镜像
 FROM alpine:latest
@@ -20,10 +20,10 @@ FROM alpine:latest
 RUN apk add --no-cache ca-certificates
 
 # 将构建阶段生成的可执行文件复制到当前镜像
-COPY --from=builder /app/helloapp /app/helloapp
+COPY --from=builder /app/online-shopping /app/online-shopping
 
 # 暴露应用使用的端口
 EXPOSE 3002
 
 # 设置容器启动时运行的命令
-CMD ["/app/helloapp"]
+CMD ["/app/online-shopping"]

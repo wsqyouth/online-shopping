@@ -1,23 +1,21 @@
-// main.go
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"log"
+	"online-shopping/internal/server/handlers/account"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// 创建默认的 Gin 路由器
+	// 创建 Gin 路由器
 	router := gin.Default()
 
-	// 创建一个路由组 /group
-	group := router.Group("/group")
-	{
-		group.POST("/hello", HelloHandler)
-		group.POST("/calc", CalcHandler)
-	}
+	// 初始化 AccountHandler，并将其注册到路由器中
+	accountHandler := account.NewAccountHandler()
+	accountHandler.RegisterRoutes(router)
 
-	// 运行 HTTP 服务，监听 3002 端口
+	// 启动服务器
 	if err := router.Run(":3002"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}

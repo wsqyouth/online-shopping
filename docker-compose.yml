@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  helloapp:
+  online-shopping:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: helloapp-container
-    image: helloapp-image
+    container_name: online-shopping-container
+    image: online-shopping-image
     ports:
       - "3002:3002"  # 替换为需要的端口映射
     depends_on:
