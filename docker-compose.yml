@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  helloapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: helloapp-container
+    image: helloapp-image
+    ports:
+      - "3002:3002"  # 替换为需要的端口映射
+    depends_on:
+      - dependencies
+    restart: always
+
+  dependencies:
+    image: alpine:latest
+    container_name: dependencies-container
+    command: sh -c "apk add --no-cache bash make git tar curl && tail -f /dev/null"
